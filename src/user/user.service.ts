@@ -1,19 +1,27 @@
 import { Injectable } from '@nestjs/common';
-import { User } from 'interfaces/user.interface';
-import { UserDocument, UserModel } from './user.model';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { User, UserDocument } from 'src/user-db/user.schema';
+import { basicProfileDto } from './basic-profile.dto';
 
 @Injectable()
 export class UserService {
-  constructor(
-    @InjectModel(UserModel.name)
-    private readonly userModel: Model<UserDocument>,
-  ) {}
+  constructor(@InjectModel('User') private userModel: Model<UserDocument>) {}
 
-  async getUserById(userId: string): Promise<User | null> {
-    console.log(userId);
-    return this.userModel.findById(userId).exec();
+  async getUserById(userId: string): Promise<basicProfileDto | null> {
+    const user = await this.userModel.findById(userId).exec();
+
+    if (!user) {
+      return null;
+    }
+
+    return {
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      picture: user.picture,
+      locale: user.locale,
+    };
   }
 
   async getAllUsers(): Promise<User[]> {

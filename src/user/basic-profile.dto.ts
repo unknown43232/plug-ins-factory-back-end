@@ -1,10 +1,7 @@
-export interface User {
-  id: string;
-  googleId: string;
+export class basicProfileDto {
   email: string;
   firstName: string;
   lastName: string;
   picture: string;
   locale: string;
-  password: string;
 }

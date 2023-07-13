@@ -1,8 +1,8 @@
 import { Controller, Get, Request, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { JwtAuthGuard } from '../middlewares/jwt-auth.guard';
-import { User } from 'interfaces/user.interface';
-import { log } from 'console';
+import { User } from 'src/user-db/user.schema';
+import { basicProfileDto } from './basic-profile.dto';
 
 @Controller('users')
 export class UserController {
@@ -10,8 +10,7 @@ export class UserController {
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
-  async getUserProfile(@Request() req: any): Promise<User> {
-    // console.log('take :' + JSON.stringify(req.user));
+  async getUserProfile(@Request() req: any): Promise<basicProfileDto> {
     const userId = req.user.userId;
     return this.userService.getUserById(userId);
   }

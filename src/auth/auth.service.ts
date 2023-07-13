@@ -5,13 +5,13 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { User } from '../../interfaces/user.interface';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/create-user.dto';
+import { User, UserDocument } from 'src/user-db/user.schema';
 
 @Injectable()
 export class AuthService {
-  constructor(@InjectModel('User') private userModel: Model<User>) {}
+  constructor(@InjectModel('User') private userModel: Model<UserDocument>) {}
 
   async register(createUserDto: CreateUserDto): Promise<User> {
     const { email, password } = createUserDto;

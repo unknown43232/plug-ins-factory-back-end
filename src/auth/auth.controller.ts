@@ -6,10 +6,10 @@ import {
   Req,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { User } from 'interfaces/user.interface';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from './dto/create-user.dto';
 import { LoginResponse } from 'interfaces/login-response.interface';
+import { User } from 'src/user-db/user.schema';
 
 @Controller('auth')
 export class AuthController {
