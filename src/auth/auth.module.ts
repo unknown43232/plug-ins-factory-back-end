@@ -6,6 +6,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './strategy/jwt.strategy';
 import { UserDbModule } from 'src/user-db/user-db.module';
+import { GoogleStrategy } from './sso/google/google.strategy';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { UserDbModule } from 'src/user-db/user-db.module';
       signOptions: { expiresIn: '24h' }, // Set the token expiration time
     }),
   ],
-  providers: [AuthService, JwtStrategy], // Add JwtStrategy
+  providers: [AuthService, JwtStrategy, GoogleStrategy], // Add JwtStrategy
   controllers: [AuthController, GoogleController],
   exports: [JwtStrategy, PassportModule], // Export JwtStrategy and PassportModule
 })

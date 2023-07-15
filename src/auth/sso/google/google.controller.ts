@@ -11,7 +11,7 @@ export class GoogleController {
 
   @Get('callback')
   @UseGuards(AuthGuard('google'))
-  @Redirect('/dashboard') // Redirect to the dashboard or desired URL after successful Google authentication
+  @Redirect('/home') // Redirect to the dashboard or desired URL after successful Google authentication
   async googleLoginCallback(@Req() req, @Res() res) {
     // This method will not have any explicit implementation as the passport-google-oauth20 strategy handles the callback internally
     // The @Redirect decorator will handle the redirection after successful authentication
