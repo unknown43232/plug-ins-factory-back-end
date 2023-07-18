@@ -1,15 +1,9 @@
-import {
-  Controller,
-  Post,
-  Body,
-  UnauthorizedException,
-  Req,
-} from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { JwtService } from '@nestjs/jwt';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto } from '../dto/create-user.dto';
 import { LoginResponse } from 'interfaces/login-response.interface';
-import { User } from 'src/user-db/user.schema';
+import { User } from 'src/user/user.schema';
+import { JwtService } from '@nestjs/jwt';
 
 @Controller('auth')
 export class AuthController {
