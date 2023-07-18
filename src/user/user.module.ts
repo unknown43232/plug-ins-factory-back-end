@@ -5,7 +5,7 @@ import { AuthController } from './auth/auth.controller';
 import { GoogleController } from './auth/sso/google/google.controller';
 import { AuthService } from './auth/auth.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UserSchema } from './user.schema';
+import { UserSchema } from '../models/user.schema';
 import { JwtModule } from '@nestjs/jwt';
 
 @Module({
