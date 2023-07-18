@@ -1,9 +1,13 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { LoginResponse } from 'interfaces/login-response.interface';
-import { User } from 'src/user/user.schema';
-import { JwtService } from '@nestjs/jwt';
 
 @Controller('auth')
 export class AuthController {
@@ -11,24 +15,44 @@ export class AuthController {
 
   @Post('register')
   async register(@Body() createUserDto: CreateUserDto) {
-    const user = await this.authService.register(createUserDto);
+    try {
+      const user = await this.authService.register(createUserDto);
 
-    // You can customize the response based on your requirements
-    return {
-      message: 'User registered successfully',
-      user: user.email,
-    };
+      return {
+        message: 'User registered successfully',
+        user: user.email,
+      };
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          error: 'Error registering user',
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
 
   @Post('login')
   async login(@Body() createUserDto: CreateUserDto): Promise<LoginResponse> {
-    const user = await this.authService.login(createUserDto);
-    const token = this.authService.generateToken(user);
-    // You can customize the response based on your requirements
-    return {
-      message: 'User logged in successfully',
-      email: user.email,
-      token: token,
-    };
+    try {
+      const user = await this.authService.login(createUserDto);
+      const token = this.authService.generateToken(user);
+
+      // You can customize the response based on your requirements
+      return {
+        message: 'User logged in successfully',
+        email: user.email,
+        token: token,
+      };
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.UNAUTHORIZED,
+          error: 'Error logging in',
+        },
+        HttpStatus.UNAUTHORIZED,
+      );
+    }
   }
 }
