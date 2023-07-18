@@ -7,10 +7,7 @@ import { JwtService } from '@nestjs/jwt';
 
 @Controller('auth')
 export class AuthController {
-  constructor(
-    private readonly authService: AuthService,
-    private readonly jwtService: JwtService,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Post('register')
   async register(@Body() createUserDto: CreateUserDto) {
@@ -26,16 +23,12 @@ export class AuthController {
   @Post('login')
   async login(@Body() createUserDto: CreateUserDto): Promise<LoginResponse> {
     const user = await this.authService.login(createUserDto);
-    const token = this.generateToken(user);
+    const token = this.authService.generateToken(user);
     // You can customize the response based on your requirements
     return {
       message: 'User logged in successfully',
       email: user.email,
       token: token,
     };
-  }
-  private generateToken(user: User): string {
-    const payload = { email: user.email, sub: user.id };
-    return this.jwtService.sign(payload);
   }
 }

@@ -8,8 +8,11 @@ import { AppService } from './app.service'; // Make sure to import AppService
 @Module({
   imports: [
     DatabaseModule,
+    JwtModule.register({
+      secret: process.env.JWT_SECRET, // replace with your secret
+      signOptions: { expiresIn: '60s' }, // customize as needed
+    }),
     UserModule,
-    JwtModule.register({ secret: process.env.JWT_SECRET }),
   ],
   controllers: [AppController],
   providers: [AppService], // Add AppService to the providers array

@@ -8,10 +8,14 @@ import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { User, UserDocument } from 'src/user/user.schema';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(@InjectModel('User') private userModel: Model<UserDocument>) {}
+  constructor(
+    @InjectModel('User') private userModel: Model<UserDocument>,
+    private readonly jwtService: JwtService,
+  ) {}
 
   async register(createUserDto: CreateUserDto): Promise<User> {
     const { email, password } = createUserDto;
@@ -55,5 +59,9 @@ export class AuthService {
     hashedPassword: string,
   ): Promise<boolean> {
     return bcrypt.compare(password, hashedPassword);
+  }
+  generateToken(user: User): string {
+    const payload = { email: user.email, sub: user.id };
+    return this.jwtService.sign(payload);
   }
 }
