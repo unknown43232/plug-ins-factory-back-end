@@ -32,6 +32,9 @@ export class UserService {
     const newUser = new this.userModel(user);
     return newUser.save();
   }
+  async findUserByEmail(email: string): Promise<User | null> {
+    return this.userModel.findOne({ email }).exec();
+  }
 
   async updateUser(userId: string, user: Partial<User>): Promise<User | null> {
     return this.userModel.findByIdAndUpdate(userId, user, { new: true }).exec();
