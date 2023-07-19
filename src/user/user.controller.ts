@@ -3,7 +3,7 @@ import { UserService } from './user.service';
 import { JwtAuthGuard } from '../middlewares/jwt-auth.guard';
 import { basicProfileDto } from './dto/basic-profile.dto';
 @UseGuards(JwtAuthGuard)
-@Controller('users')
+@Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 

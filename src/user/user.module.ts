@@ -14,7 +14,7 @@ import { GoogleStrategy } from './auth/sso/google/google.strategy';
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
     JwtModule.register({
       secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: '600s' },
+      signOptions: { expiresIn: '60s' },
     }),
   ],
   providers: [UserService, AuthService, GoogleStrategy],

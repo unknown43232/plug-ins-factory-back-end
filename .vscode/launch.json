@@ -1,16 +1,14 @@
 {
   "version": "0.2.0",
   "configurations": [
-    
     {
-      "name": "Debug Nest App",
       "type": "node",
-      "request": "launch",
-      "runtimeArgs": ["${workspaceFolder}/node_modules/.bin/nest", "start"],
-      "env": {
-        "NODE_ENV": "development"
-      },
-      "cwd": "${workspaceFolder}"
+      "request": "attach",
+      "name": "Debug NestJS",
+      "port": 9229,
+      "restart": true,
+      "stopOnEntry": false,
+      "protocol": "inspector"
     }
   ]
 }
