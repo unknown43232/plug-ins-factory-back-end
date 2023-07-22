@@ -7,7 +7,7 @@ import { basicProfileDto } from './dto/basic-profile.dto';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get('profile')
+  @Get('home')
   async getUserProfile(@Request() req: any): Promise<basicProfileDto> {
     const userId = req.user.userId;
     return this.userService.getUserById(userId);

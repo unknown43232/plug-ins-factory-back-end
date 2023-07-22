@@ -80,7 +80,7 @@ export class AuthService {
 
   generateToken(user: User): string {
     try {
-      const payload = { email: user.email, sub: user.id };
+      const payload = { email: user.email, id: user.id };
       return this.jwtService.sign(payload);
     } catch (error) {
       throw new InternalServerErrorException('Error generating token');

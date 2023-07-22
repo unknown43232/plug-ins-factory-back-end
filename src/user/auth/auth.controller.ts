@@ -20,6 +20,7 @@ export class AuthController {
       return {
         message: 'User registered successfully',
         user: user.email,
+        token: this.authService.generateToken(user),
       };
     } catch (error) {
       throw new HttpException(
