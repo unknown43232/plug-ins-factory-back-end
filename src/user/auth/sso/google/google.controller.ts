@@ -19,10 +19,14 @@ export class GoogleController {
     try {
       const user = req.user;
       const token = this.authService.generateToken(user);
-      res.json({
-        message: 'User authenticated successfully',
-        token: token,
+      // Set token as a HTTP-only cookie
+      res.cookie('token', token, {
+        httpOnly: true,
+        sameSite: 'lax',
+        // secure: true, // Uncomment this option if you're serving your app over HTTPS
       });
+      // Redirect to your Angular app
+      res.redirect('http://localhost:4200');
     } catch (error) {
       // Handle any errors that occur during the authentication process
       res.status(500).json({ message: 'Error during authentication' });

@@ -4,10 +4,14 @@ import {
   Body,
   HttpException,
   HttpStatus,
+  Get,
+  Request,
+  UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { LoginResponse } from 'interfaces/login-response.interface';
+import { JwtAuthGuard } from 'src/middlewares/jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -30,6 +34,16 @@ export class AuthController {
         },
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
+    }
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('isAuthenticated')
+  isAuthenticated(@Request() req) {
+    if (req.user) {
+      return { isAuthenticated: true };
+    } else {
+      return { isAuthenticated: false };
     }
   }
 
