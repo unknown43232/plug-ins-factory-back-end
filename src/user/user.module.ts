@@ -8,6 +8,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UserSchema } from '../models/user.schema';
 import { JwtModule } from '@nestjs/jwt';
 import { GoogleStrategy } from './auth/sso/google/google.strategy';
+import { JwtStrategy } from 'src/middlewares/jwt.strategy';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { GoogleStrategy } from './auth/sso/google/google.strategy';
       signOptions: { expiresIn: '600s' },
     }),
   ],
-  providers: [UserService, AuthService, GoogleStrategy],
+  providers: [UserService, AuthService, JwtStrategy, GoogleStrategy],
   controllers: [UserController, AuthController, GoogleController],
   exports: [UserService],
 })
