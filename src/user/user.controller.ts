@@ -9,7 +9,7 @@ export class UserController {
 
   @Get('home')
   async getUserProfile(@Request() req: any): Promise<basicProfileDto> {
-    const userId = req.user.userId;
+    const userId = req.user.id;
     return this.userService.getUserById(userId);
   }
 

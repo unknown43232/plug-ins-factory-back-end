@@ -78,6 +78,12 @@ export class AuthService {
     }
   }
 
+  async validateUser(payload: any): Promise<User> {
+    // Implement this method based on your application's logic.
+    // For example, you might want to find a user by their ID or email:
+    return this.userModel.findOne({ _id: payload.id }).exec();
+  }
+
   generateToken(user: User): string {
     try {
       const payload = { email: user.email, id: user.id };
