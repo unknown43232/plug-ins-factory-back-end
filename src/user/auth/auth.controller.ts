@@ -33,7 +33,6 @@ export class AuthController {
         sameSite: 'lax',
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // One week from now
         secure: false,
-        domain: 'https://pluginsfactory.netlify.app',
       });
       res.json({
         message: 'User registered successfully',
@@ -79,7 +78,6 @@ export class AuthController {
         sameSite: 'lax',
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // One week from now
         secure: true,
-        domain: 'https://pluginsfactory.netlify.app',
       });
       res.json({
         message: 'User logged in successfully',
