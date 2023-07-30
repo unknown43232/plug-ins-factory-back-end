@@ -8,7 +8,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UserSchema } from '../models/user.schema';
 import { JwtModule } from '@nestjs/jwt';
 import { GoogleStrategy } from './auth/sso/google/google.strategy';
-import { JwtStrategy } from 'src/middlewares/jwt.strategy';
+import { JwtStrategy } from './auth/jwt.strategy';
 
 @Module({
   imports: [
