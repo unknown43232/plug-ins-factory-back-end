@@ -12,6 +12,7 @@ async function bootstrap() {
       'http://localhost:4200',
       'pluginsfactory.com',
       'timely-dolphin-db3d1b.netlify.app',
+      'https://timely-dolphin-db3d1b.netlify.app/',
     ], // replace with your frontend domain
     credentials: true,
   });
