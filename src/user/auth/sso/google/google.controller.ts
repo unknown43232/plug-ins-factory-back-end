@@ -23,7 +23,7 @@ export class GoogleController {
       res.cookie('token', token, {
         httpOnly: true,
         sameSite: 'lax',
-        // secure: true, // Uncomment this option if you're serving your app over HTTPS
+        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // One week from now
       });
       // Redirect to your Angular app
       res.redirect('http://localhost:4200');
