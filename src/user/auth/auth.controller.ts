@@ -70,8 +70,8 @@ export class AuthController {
   ): Promise<any> {
     try {
       const user = await this.authService.login(createUserDto);
-      // You can customize the response based on your requirements
       const token = await this.authService.generateToken(user);
+
       await res.cookie('token', token, {
         httpOnly: true,
         sameSite: 'lax',
