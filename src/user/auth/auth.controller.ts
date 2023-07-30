@@ -30,7 +30,7 @@ export class AuthController {
 
       await res.cookie('token', token, {
         httpOnly: true,
-        sameSite: 'lax',
+        sameSite: 'none',
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // One week from now
         secure: false,
       });
@@ -75,7 +75,7 @@ export class AuthController {
 
       await res.cookie('token', token, {
         httpOnly: true,
-        sameSite: 'lax',
+        sameSite: 'none',
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // One week from now
         secure: true,
       });
