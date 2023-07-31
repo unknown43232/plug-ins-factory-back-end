@@ -30,10 +30,10 @@ export class AuthController {
 
       await res.cookie('token', token, {
         httpOnly: true,
-        // sameSite: 'none',
+        sameSite: 'none',
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // One week from now
         // secure: true,
-        // domain: process.env.DOMAIN,
+        domain: process.env.DOMAIN,
       });
       res.json({
         message: 'User registered successfully',
