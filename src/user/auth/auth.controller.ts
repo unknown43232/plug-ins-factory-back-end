@@ -11,7 +11,6 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from '../dto/create-user.dto';
-import { LoginResponse } from 'interfaces/login-response.interface';
 import { JwtAuthGuard } from 'src/middlewares/jwt-auth.guard';
 import { Response } from 'express';
 
@@ -27,14 +26,6 @@ export class AuthController {
     try {
       const user = await this.authService.register(createUserDto);
       const token = await this.authService.generateToken(user);
-
-      // await res.cookie('token', token, {
-      //   httpOnly: true,
-      //   sameSite: 'none',
-      //   expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // One week from now
-      //   // secure: true,
-      //   // domain: process.env.DOMAIN,
-      // });
       res.json({
         message: 'User registered successfully',
         email: user.email,
@@ -74,14 +65,6 @@ export class AuthController {
     try {
       const user = await this.authService.login(createUserDto);
       const token = await this.authService.generateToken(user);
-
-      // await res.cookie('token', token, {
-      //   httpOnly: true,
-      //   sameSite: 'none',
-      //   expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // One week from now
-      //   secure: true,
-      //   domain: process.env.DOMAIN,
-      // });
       res.json({
         message: 'User logged in successfully',
         email: user.email,
