@@ -32,7 +32,7 @@ export class AuthController {
         httpOnly: true,
         sameSite: 'none',
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // One week from now
-        secure: false,
+        secure: true,
       });
       res.json({
         message: 'User registered successfully',
@@ -77,7 +77,7 @@ export class AuthController {
         httpOnly: true,
         sameSite: 'none',
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // One week from now
-        secure: false,
+        secure: true,
       });
       res.json({
         message: 'User logged in successfully',
