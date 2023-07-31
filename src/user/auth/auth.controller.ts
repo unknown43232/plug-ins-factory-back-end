@@ -28,16 +28,17 @@ export class AuthController {
       const user = await this.authService.register(createUserDto);
       const token = await this.authService.generateToken(user);
 
-      await res.cookie('token', token, {
-        httpOnly: true,
-        sameSite: 'none',
-        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // One week from now
-        // secure: true,
-        // domain: process.env.DOMAIN,
-      });
+      // await res.cookie('token', token, {
+      //   httpOnly: true,
+      //   sameSite: 'none',
+      //   expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // One week from now
+      //   // secure: true,
+      //   // domain: process.env.DOMAIN,
+      // });
       res.json({
         message: 'User registered successfully',
         email: user.email,
+        token: token,
       });
     } catch (error) {
       throw new HttpException(
@@ -59,11 +60,11 @@ export class AuthController {
       return { isAuthenticated: false };
     }
   }
-  @Post('logout')
-  signOut(@Res() res: Response): void {
-    res.clearCookie('token', { path: '/' });
-    res.json({ message: 'Successfully signed out' });
-  }
+  // @Post('logout')
+  // signOut(@Res() res: Response): void {
+  //   res.clearCookie('token', { path: '/' });
+  //   res.json({ message: 'Successfully signed out' });
+  // }
 
   @Post('login')
   async login(
@@ -74,16 +75,17 @@ export class AuthController {
       const user = await this.authService.login(createUserDto);
       const token = await this.authService.generateToken(user);
 
-      await res.cookie('token', token, {
-        httpOnly: true,
-        sameSite: 'none',
-        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // One week from now
-        secure: true,
-        domain: process.env.DOMAIN,
-      });
+      // await res.cookie('token', token, {
+      //   httpOnly: true,
+      //   sameSite: 'none',
+      //   expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // One week from now
+      //   secure: true,
+      //   domain: process.env.DOMAIN,
+      // });
       res.json({
         message: 'User logged in successfully',
         email: user.email,
+        token: token,
       });
     } catch (error) {
       throw new HttpException(

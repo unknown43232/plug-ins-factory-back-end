@@ -27,7 +27,7 @@ export class GoogleController {
         secure: true,
       });
       // Redirect to your Angular app
-      res.redirect('http://localhost:4200');
+      res.redirect(process.env.ORIGIN);
     } catch (error) {
       // Handle any errors that occur during the authentication process
       res.status(500).json({ message: 'Error during authentication' });
