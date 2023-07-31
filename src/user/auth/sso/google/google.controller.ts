@@ -21,9 +21,10 @@ export class GoogleController {
       const token = this.authService.generateToken(user);
       // Set token as a HTTP-only cookie
       res.cookie('token', token, {
-        httpOnly: true,
-        sameSite: 'lax',
+        httpOnly: false,
+        sameSite: 'none',
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // One week from now
+        secure: true,
       });
       // Redirect to your Angular app
       res.redirect('http://localhost:4200');

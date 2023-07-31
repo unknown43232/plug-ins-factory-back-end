@@ -29,7 +29,7 @@ export class AuthController {
       const token = await this.authService.generateToken(user);
 
       await res.cookie('token', token, {
-        httpOnly: true,
+        httpOnly: false,
         sameSite: 'none',
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // One week from now
         secure: true,
@@ -74,7 +74,7 @@ export class AuthController {
       const token = await this.authService.generateToken(user);
 
       await res.cookie('token', token, {
-        httpOnly: true,
+        httpOnly: false,
         sameSite: 'none',
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // One week from now
         secure: true,
