@@ -8,11 +8,12 @@ async function bootstrap() {
   app.use(cookieParser());
   app.enableCors({
     origin: [
-      'http://localhost:3000',
-      'http://localhost:4200',
-      'pluginsfactory.com',
-      'pluginsfactory.netlify.app',
-      'https://pluginsfactory.netlify.app',
+      process.env.ORIGIN,
+      // 'http://localhost:3000',
+      // 'http://localhost:4200',
+      // 'pluginsfactory.com',
+      // 'pluginsfactory.netlify.app',
+      // 'https://pluginsfactory.netlify.app',
     ],
     credentials: true,
   });
