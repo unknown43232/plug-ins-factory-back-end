@@ -29,10 +29,11 @@ export class AuthController {
       const token = await this.authService.generateToken(user);
 
       await res.cookie('token', token, {
-        httpOnly: false,
+        httpOnly: true,
         sameSite: 'none',
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // One week from now
         secure: true,
+        domain: process.env.ORIGIN,
       });
       res.json({
         message: 'User registered successfully',
@@ -74,10 +75,11 @@ export class AuthController {
       const token = await this.authService.generateToken(user);
 
       await res.cookie('token', token, {
-        httpOnly: false,
+        httpOnly: true,
         sameSite: 'none',
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // One week from now
         secure: true,
+        domain: process.env.ORIGIN,
       });
       res.json({
         message: 'User logged in successfully',
