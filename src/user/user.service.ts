@@ -10,18 +10,10 @@ export class UserService {
 
   async getUserById(userId: string): Promise<basicProfileDto | null> {
     const user = await this.userModel.findById(userId).exec();
-
     if (!user) {
       return null;
     }
-
-    return {
-      email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      picture: user.picture,
-      locale: user.locale,
-    };
+    return user;
   }
 
   async getAllUsers(): Promise<User[]> {

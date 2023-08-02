@@ -23,7 +23,7 @@ export class AuthService {
       const { email, password } = createUserDto;
 
       // Validate the user data
-      if (!email || !password) {
+      if (!email || !password || !this.isValidEmail(email)) {
         throw new BadRequestException('Email and password are required');
       }
 
@@ -42,6 +42,10 @@ export class AuthService {
     } catch (error) {
       throw new InternalServerErrorException('Error registering the user');
     }
+  }
+  isValidEmail(email) {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return regex.test(email);
   }
 
   async login(createUserDto: CreateUserDto): Promise<User> {
