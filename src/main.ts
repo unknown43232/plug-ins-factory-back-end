@@ -7,14 +7,13 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cookieParser());
   app.enableCors({
-    origin: [
-      process.env.ORIGIN,
-      // 'http://localhost:3000',
-      // 'http://localhost:4200',
-      // 'pluginsfactory.com',
-      // 'pluginsfactory.netlify.app',
-      // 'https://pluginsfactory.netlify.app',
-    ],
+    origin: process.env.ORIGINS.split(','),
+    // 'http://localhost:3000',
+    // 'http://localhost:4200',
+    // 'pluginsfactory.com',
+    // 'pluginsfactory.netlify.app',
+    // 'https://pluginsfactory.netlify.app',
+
     credentials: true,
   });
   await app.listen(process.env.PORT, '0.0.0.0');
