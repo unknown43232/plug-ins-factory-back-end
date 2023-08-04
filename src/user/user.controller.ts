@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Post,
+  Put,
   Request,
   UseGuards,
 } from '@nestjs/common';
@@ -27,7 +28,7 @@ export class UserController {
     };
   }
 
-  @Post('update')
+  @Put('update')
   async updateUserProfile(
     @Body() body: any,
     @Request() req: any,
